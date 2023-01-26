@@ -30,7 +30,7 @@ import static java.util.stream.Collectors.toList;
 
     }
 
-    class Mini_Max_Sum  {
+    class Solution2  {
         public static void main(String[] args) throws IOException {
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(System.in));
 
