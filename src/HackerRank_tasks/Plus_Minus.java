@@ -39,7 +39,7 @@ public class Plus_Minus {
                 .map(Integer::parseInt)
                 .collect(toList());
 
-        Result.plusMinus(arr);
+        Result7.plusMinus(arr);
 
         bufferedReader.close();
     }
