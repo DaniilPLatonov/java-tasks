@@ -1,28 +1,14 @@
 package HackerRank_tasks;
 
 import java.io.*;
-import java.math.*;
-import java.security.*;
-import java.text.*;
 import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
-import java.util.regex.*;
 import java.util.stream.*;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 class Result4 {
 
-    /*
-     * Complete the 'breakingRecords' function below.
-     *
-     * The function is expected to return an INTEGER_ARRAY.
-     * The function accepts INTEGER_ARRAY scores as parameter.
-     */
-
     public static List<Integer> breakingRecords(List<Integer> scores) {
-        // Write your code here
         ArrayList<Integer> arr = new ArrayList<Integer>();
 
         int max=scores.get(0);
@@ -38,9 +24,7 @@ class Result4 {
                 minCount++;
             }
         }
-//int [] arr= new int[2];
-//arr[0]=maxCount;
-//arr[1]=minCount;
+
         arr.add(maxCount);
         arr.add(minCount);
         return arr;
