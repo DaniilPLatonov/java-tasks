@@ -13,11 +13,23 @@ public class task_5 {
         for (int i = 0; i < count; i++) {
             arr.add(scanner.nextInt());
         }
-        sumFrequency(arr);
+        System.out.println(sumFrequency(arr));
     }
 
-    public static void sumFrequency(List <Integer> arr){
-
+    public static Integer sumFrequency(List<Integer> arr) {
+        int max = 0;
+        for (int i = 0; i < arr.size(); i++) {
+            int sum = arr.get(i);
+            for (int j = 0; j < arr.size(); j++) {
+                if (arr.get(j) % arr.get(i) == 0 && i != j) {
+                    sum += arr.get(j);
+                }
+            }
+            if(sum > max){
+                max = sum;
+            }
+        }
+        return max;
     }
 
 }
