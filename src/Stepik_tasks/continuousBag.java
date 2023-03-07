@@ -36,7 +36,7 @@ public class continuousBag {
                 volumeThings = volumeThings - bag2.getVolumeThing();
             } else {
                 result += volumeThings * bag2.getPrice_volume();
-                volumeThings = volumeThings - bag2.getVolumeThing();
+                volumeThings = 0;
             }
         }
         String result2 = String.format("%.3f", result);
