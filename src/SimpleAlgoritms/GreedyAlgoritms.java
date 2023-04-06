@@ -6,7 +6,7 @@ import java.util.Collections;
 public class GreedyAlgoritms {
     public static void main(String[] args) {
         int[] station = {0, 200, 375, 550, 750, 950};
-        System.out.println(minStops(station, 400));
+         System.out.println(minStops(station, 400));
 
   /*      int[] digits = {1, 3, 7, 9, 9, 5};
         System.out.println(maxNumberFromDigits(digits));*/
