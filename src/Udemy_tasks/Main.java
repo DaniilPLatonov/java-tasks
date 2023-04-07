@@ -4,6 +4,9 @@ package Udemy_tasks;
 
 public class  Main {
     public static void main(String[] args) {
+        int a1 = 4; //010
+        int b1 = 5;//101
+        System.out.println(a1|b1);
 
     }
 }
