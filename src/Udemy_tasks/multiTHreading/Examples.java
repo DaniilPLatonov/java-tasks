@@ -1,10 +1,13 @@
 package Udemy_tasks.multiTHreading;
 
-import java.util.Arrays;
-import java.util.Scanner;
+import java.util.*;
 
 public class Examples {
     public static void main(String[] args) {
+        TreeMap map = new TreeMap();
+        map.put("Omega", 24);
+        map.put("Alpha", 1);
+        map.put("Gamma", 3);
 
     }
 }
@@ -120,5 +123,38 @@ class Starter {
         public long getNumberOfUniqueCharacters() {
             return numberOfUniqueCharacters;
         }
+    }
+}
+
+
+
+class MapUtils {
+
+    public static SortedMap<String, Integer> wordCount(String[] strings) {
+        SortedMap<String,Integer> products = new TreeMap<>();
+        for(int i = 0; i < strings.length; i++){
+            if(products.containsKey(strings[i])){
+                products.put(strings[i], products.get(strings[i])+1);
+            }else{
+                products.put(strings[i],1);
+            }
+        }
+        return products;
+    }
+
+    public static void printMap(Map<String, Integer> map) {
+        for (Map.Entry<String, Integer> entry : map.entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+    }
+
+}
+
+/* Do not change code below */
+ class Main2 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        String[] words = scanner.nextLine().split(" ");
+        MapUtils.printMap(MapUtils.wordCount(words));
     }
 }
