@@ -5,6 +5,15 @@ import java.util.Arrays;
 public class FibonacciMemouzation {
 
     public static void main(String[] args) {
+
+        Integer counter = 1;
+        Integer c = 1;
+
+        System.out.printf("%b",c == counter);
+
+
+
+
         int n = 100;
         long[] mem = new long[n +1];
         Arrays.fill(mem, -1);
