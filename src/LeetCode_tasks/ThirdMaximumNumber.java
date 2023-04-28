@@ -9,7 +9,7 @@ public class ThirdMaximumNumber {
 
     }
 
-    public static int thirdMax(int[] nums) {
+/*    public static int thirdMax(int[] nums) {
         Arrays.sort(nums);
         long max1 = Long.MIN_VALUE;
         long max2 = Long.MIN_VALUE;
@@ -17,5 +17,5 @@ public class ThirdMaximumNumber {
 
         for (int i = 0; i < nums.length; i++) {
         }
-    }
+    }*/
 }
