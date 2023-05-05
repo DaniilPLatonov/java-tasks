@@ -9,7 +9,7 @@ public class FractionalKnapsack {
         final Item item1 = new Item(4, 20);
         final Item item2 = new Item(3, 10);
         final Item item3 = new Item(2, 14);
-        final Item[] items = {item1, item2, item3};
+
         //O(N * log(n))
         Arrays.sort(items, Comparator.comparingDouble(Item::valuePerUnitOfWeight).reversed());
 
