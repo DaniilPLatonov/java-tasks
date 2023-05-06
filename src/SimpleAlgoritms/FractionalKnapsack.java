@@ -8,7 +8,7 @@ public class FractionalKnapsack {
     public static void main(String[] args) {
         final Item item1 = new Item(4, 20);
         final Item item2 = new Item(3, 10);
-        final Item item3 = new Item(2, 14);
+
 
         //O(N * log(n))
         Arrays.sort(items, Comparator.comparingDouble(Item::valuePerUnitOfWeight).reversed());
