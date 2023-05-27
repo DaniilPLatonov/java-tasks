@@ -11,7 +11,7 @@ public class FractionalKnapsack {
 
 
         //O(N * log(n))
-        Arrays.sort(items, Comparator.comparingDouble(Item::valuePerUnitOfWeight).reversed());
+       // Arrays.sort(items, Comparator.comparingDouble(Item::valuePerUnitOfWeight).reversed());
 
         final int capasity = 7;
 
