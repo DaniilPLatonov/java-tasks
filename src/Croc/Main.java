@@ -5,77 +5,57 @@ import java.util.*;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
+        int logEntries = scanner.nextInt();
+        scanner.nextLine();
 
-        int n = scanner.nextInt(); // количество лифтов
-        int m = scanner.nextInt(); // количество групп
-        int d = scanner.nextInt(); // пропускная способность каждого лифта
-        int r = scanner.nextInt(); // время перемещения лифта с первого этажа на второй и наоборот
+        Map<String, Integer> resourcePathCount = new HashMap<>();
+        Map<String, Set<String>> resourcePathIPs = new HashMap<>();
+        Map<String, Integer> statusCodeCount = new HashMap<>();
 
-        List<Group> groups = new ArrayList<>();
+        for (int i = 0; i < logEntries; i++) {
+            String line = scanner.nextLine();
+            String[] parts = line.split(" ");
 
-        // считываем информацию о группах
-        for (int i = 0; i < m; i++) {
-            int ti = scanner.nextInt(); // время прибытия группы
-            int si = scanner.nextInt(); // количество человек в группе
-            groups.add(new Group(ti, si));
+            String ip = parts[0];
+            String resourcePath = parts[2];
+            int statusCode = Integer.parseInt(parts[3]);
+
+            resourcePathCount.put(resourcePath, resourcePathCount.getOrDefault(resourcePath, 0) + 1);
+
+            Set<String> ips = resourcePathIPs.getOrDefault(resourcePath, new HashSet<>());
+            ips.add(ip);
+            resourcePathIPs.put(resourcePath, ips);
+
+            if (statusCode >= 200 && statusCode <= 299) {
+                statusCodeCount.put(resourcePath, statusCodeCount.getOrDefault(resourcePath, 0) + 1);
+            }
         }
 
-        Collections.sort(groups); // сортируем группы по времени прибытия
+        int queries = scanner.nextInt();
+        scanner.nextLine();
 
-        double totalTime = 0; // общее время доставки пассажиров
-        int[] liftQueue = new int[n]; // очередь для каждого лифта
-        int[] liftFinishTime = new int[n]; // время окончания текущей операции для каждого лифта
+        for (int i = 0; i < queries; i++) {
+            String query = scanner.nextLine();
+            int count = 0;
+            int uniqueIPs = 0;
+            int successCount = 0;
 
-        for (Group group : groups) {
-            int minFinishTime = Integer.MAX_VALUE;
-            int minLift = -1;
-
-            // ищем лифт, который закончит текущую операцию раньше всех
-            for (int i = 0; i < n; i++) {
-                if (liftFinishTime[i] < minFinishTime) {
-                    minFinishTime = liftFinishTime[i];
-                    minLift = i;
+            if (query.endsWith("*")) {
+                String prefix = query.substring(0, query.length() - 1);
+                for (String resourcePath : resourcePathCount.keySet()) {
+                    if (resourcePath.startsWith(prefix)) {
+                        count += resourcePathCount.get(resourcePath);
+                        uniqueIPs += resourcePathIPs.get(resourcePath).size();
+                        successCount += statusCodeCount.getOrDefault(resourcePath, 0);
+                    }
                 }
+            } else {
+                count = resourcePathCount.getOrDefault(query, 0);
+                uniqueIPs = resourcePathIPs.getOrDefault(query, new HashSet<>()).size();
+                successCount = statusCodeCount.getOrDefault(query, 0);
             }
 
-            // время ожидания до прибытия группы
-            int waitTime = Math.max(0, group.arrivalTime - liftFinishTime[minLift]);
-
-            // время, затрачиваемое на доставку группы на второй этаж
-            int deliveryTime = (group.size + d - 1) / d * r;
-
-            // обновляем время окончания текущей операции и очередь лифта
-            liftFinishTime[minLift] = liftFinishTime[minLift] + waitTime + deliveryTime;
-            liftQueue[minLift] = liftQueue[minLift] + group.size;
-
-            // обновляем общее время доставки
-            totalTime += liftFinishTime[minLift] - group.arrivalTime;
-
-            // если очередь лифта превышает его вместимость, производим доставку пассажиров
-            if (liftQueue[minLift] > d) {
-                int excessPassengers = liftQueue[minLift] - d;
-                int unloadTime = (excessPassengers + d - 1) / d * r;
-                liftFinishTime[minLift] += unloadTime;
-                liftQueue[minLift] = Math.max(0, liftQueue[minLift] - d);
-            }
-        }
-
-        double averageTime = totalTime / m; // среднее время доставки пассажиров
-        System.out.printf("%.10f\n", averageTime);
-    }
-
-    static class Group implements Comparable<Group> {
-        int arrivalTime;
-        int size;
-
-        public Group(int arrivalTime, int size) {
-            this.arrivalTime = arrivalTime;
-            this.size = size;
-        }
-
-        @Override
-        public int compareTo(Group other) {
-            return Integer.compare(this.arrivalTime, other.arrivalTime);
+            System.out.println(count + " " + uniqueIPs + " " + successCount);
         }
     }
 }
