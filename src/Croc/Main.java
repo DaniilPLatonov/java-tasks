@@ -12,6 +12,8 @@ public class Main {
         Map<String, Set<String>> resourcePathIPs = new HashMap<>();
         Map<String, Integer> statusCodeCount = new HashMap<>();
 
+
+
         for (int i = 0; i < logEntries; i++) {
             String line = scanner.nextLine();
             String[] parts = line.split(" ");
